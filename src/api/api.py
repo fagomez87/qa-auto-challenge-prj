@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 
-from root.src.db.db import DataBase
-from root.src.api.endpoints import REGISTER_USER, LOGIN_USER
+from src.db.db import DataBase
+from src.api.endpoints import REGISTER_USER, LOGIN_USER
 
 
 app = Flask(__name__)
