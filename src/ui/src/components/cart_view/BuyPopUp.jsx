@@ -36,8 +36,10 @@ class BuyPopUp extends Component {
                         <DialogContentText>
                             We'll be sending you a link by e-mail to complete payment.
                             We only accept DLacy Coins!!
-                            <img src={imageDlacyCoin} className="dlacy-coin" />
                         </DialogContentText>
+                        <React.Fragment>
+                            <img src={imageDlacyCoin} className="dlacy-coin"/>
+                        </React.Fragment>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => this.close()} color="primary">

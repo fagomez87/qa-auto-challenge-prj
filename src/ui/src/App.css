@@ -38,7 +38,12 @@
 }
 
 .dlacy-coin {
-  align-items: center
+  margin: auto;
+  align-items: bottom;
+  max-width: 100px;
+  max-height: 100px;
+  height: 100px;
+  width: 100px;
 }
 
 .product-media {
@@ -58,3 +63,4 @@ select {
   width: 60px;
   height: 20px;
 }
+
