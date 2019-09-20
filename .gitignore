@@ -1,0 +1,9 @@
+# tmp
+tmp/
+
+# Python
+*.pyc
+*.pickle
+*.npy
+*.DS_Store
+.cache/
