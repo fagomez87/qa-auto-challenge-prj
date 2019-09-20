@@ -7,9 +7,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import cartList from '../resources/sampleCartList';
 import Button from '@material-ui/core/Button';
+import BuyPopUp from './BuyPopUp';
 
 class Cart extends Component {
-    state = {  }
+    state = {  
+        dialog: false
+    }
 
     componentDidMount() {
         // fetch /cart
@@ -17,11 +20,17 @@ class Cart extends Component {
 
     buy() {
         //fetch /buy
+        this.setState({
+            dialog: true
+        })
     }
 
     render() { 
         return (  
             <div>
+                {this.state.dialog &&
+                    <BuyPopUp open={true} />
+                }
                 <Paper>
                     <Table>
                         <TableHead>
@@ -38,7 +47,7 @@ class Cart extends Component {
                                     <TableCell>{product.name}</TableCell>
                                     <TableCell align="right">{product.quantity}</TableCell>
                                     <TableCell align="right">{product.stock}</TableCell>
-                                    <TableCell align="center"><a>X</a></TableCell>
+                                    <TableCell align="center"><a>x</a></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
