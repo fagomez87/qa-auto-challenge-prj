@@ -1,14 +1,28 @@
+import json
+import os
+
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
+from flask_swagger_ui import get_swaggerui_blueprint
+from yaml import Loader, load
 
 from src.api.endpoints import endpoints
 from src.db.db import DataBase
 from src.db.default_inventory import default_inventory
 
-
 app = Flask(__name__)
 api = Api(app)
 db = DataBase()
+
+SWAGGER_URL = '/api/docs' # URL for exposing Swagger UI (without trailing '/')
+swagger_path = os.path.join(os.path.dirname(__file__), 'api_docs.yaml')
+
+swagger_yaml = load(open(swagger_path, 'r'), Loader=Loader)
+
+blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL, swagger_path,
+    config={'spec': swagger_yaml}
+)
 
 def is_logged_in(username):
     user = db.search(table=db.users, query=(db.query.username == username))
@@ -133,6 +147,7 @@ api.add_resource(UserLogin, endpoints['LOGIN_USER'])
 api.add_resource(ProductInfo, endpoints['GET_PRODUCT'])
 api.add_resource(AddProductToCart, endpoints['ADD_TO_CART'])
 api.add_resource(CheckoutCart, endpoints['CHECKOUT_CART'])
+app.register_blueprint(blueprint, url_prefix=SWAGGER_URL)
 
 
 if __name__ == '__main__':
