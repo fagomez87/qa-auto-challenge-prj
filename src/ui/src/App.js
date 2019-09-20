@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Store from './components/main_view/Store'
+import Cart from './components/cart_view/Cart';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -23,8 +24,8 @@ class App extends Component {
         {this.state.view === "store" &&
           <Store />
         }
-        {this.state.view === "cart" &&
-          <p>Hello</p>
+        {this.state.view == "cart" &&
+          <Cart />
         }
       </header>
     </div>
