@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Button from '@material-ui/core/Button';
 
 
@@ -28,6 +27,7 @@ class AddToCartAlert extends Component {
                     open={this.state.open}
                     color="blue"
                     autoHideDuration={4000}
+                    data-test-name="added-to-cart-alert"
                     ContentProps={{
                         'aria-describedby': 'snackbar-fab-message-id',
                     }}

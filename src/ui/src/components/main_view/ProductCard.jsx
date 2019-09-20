@@ -8,6 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AddToCartAlert from './AddToCartAlert';
+import imagePen from '../resources/pen.jpg';
+// import imageStickers from '../resources/stickers.jpg'
+// import imageWaterBottle from '../resources/waterbottle.jpg'
 
 
 class ProductCard extends Component {
@@ -32,7 +35,7 @@ class ProductCard extends Component {
 
     render() { 
         return ( 
-            <Card className="product-card">
+            <Card className="product-card" data-test-name="product-card">
                 {this.state.alert &&
                     <AddToCartAlert open={true} />
                 }
@@ -40,20 +43,20 @@ class ProductCard extends Component {
                     <CardMedia
                         component="img"
                         // className={this.useStyles.media}
-                        image="../resources/pen.jpg"
+                        src={imagePen}
                         title="product"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h4" component="h2">
+                        <Typography gutterBottom variant="h4" component="h2" data-test-name="product-title">
                             {this.props.productName}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant="body2" color="textSecondary" component="p" data-test-name="product-desc">
                             {this.props.productDescription}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button onClick={() => this.buy()} size="small" color="primary">
+                    <Button onClick={() => this.buy()} size="small" color="primary" data-test-name="add-to-cart-button">
                         Add to Cart
                     </Button>
                     {this.props.productStock > 0 &&
@@ -62,7 +65,7 @@ class ProductCard extends Component {
                         </Button>
                     }
                     {this.props.productStock <= 0 &&
-                        <Button size="small" color="secondary">
+                        <Button size="small" color="secondary" data-test-name="out-of-stock-label">
                             Out of Stock!
                         </Button>
                     }
