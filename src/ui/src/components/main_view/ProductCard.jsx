@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AddToCartAlert from './AddToCartAlert';
 import imagePen from '../resources/pen.jpg';
-// import imageStickers from '../resources/stickers.jpg'
-// import imageWaterBottle from '../resources/waterbottle.jpg'
+import imageStickers from '../resources/stickers.jpg'
+import imageWaterBottle from '../resources/waterbottle.jpg'
 
 
 class ProductCard extends Component {
@@ -33,7 +33,18 @@ class ProductCard extends Component {
         })
     }
 
+    imageValidation(product) {
+        if(product == "ASAPP Pen") {
+            return imagePen;
+        } else if(product == "ASAPP Stickers") {
+            return imageStickers;
+        } else if(product == "ASAPP Water Bottle") {
+            return imageWaterBottle;
+        }
+    }
+
     render() { 
+        console.log(this.props.productName)
         return ( 
             <Card className="product-card" data-test-name="product-card">
                 {this.state.alert &&
@@ -43,7 +54,7 @@ class ProductCard extends Component {
                     <CardMedia
                         component="img"
                         // className={this.useStyles.media}
-                        src={imagePen}
+                        src={this.imageValidation(this.props.productName)}
                         title="product"
                     />
                     <CardContent>

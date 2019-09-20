@@ -22,6 +22,7 @@
 }
 
 .product-card {
+  display: inline-block;
   width: 350px;
   margin: 40px;
 }

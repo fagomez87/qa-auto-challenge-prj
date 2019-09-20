@@ -29,7 +29,7 @@ class Login extends Component {
                         <TextField
                             label="Mail"
                             defaultValue="mail@dlacy.com"
-                            size="long"
+                            fullWidth="true"
                         />
                     </CardContent>
                 </CardActionArea>

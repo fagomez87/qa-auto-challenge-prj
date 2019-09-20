@@ -17,7 +17,6 @@ class App extends Component {
   render() { 
     return (  
       <div className="App">
-<<<<<<< HEAD
         {Cookies.get('DLacy') &&
           <React.Fragment>
             <AppBar position="static">
@@ -35,17 +34,6 @@ class App extends Component {
               }
             </header>
           </React.Fragment>
-=======
-      <AppBar position="static">
-        <Tabs>
-          <Tab onClick={() => this.setState({view: "store"})} label="Store" data-test-name="menu_store_option" />
-          <Tab onClick={() => this.setState({view: "cart"})} label="Cart" data-test-name="menu_cart_option" />
-        </Tabs>
-      </AppBar>
-      <header className="App-header">
-        {this.state.view === "store" &&
-          <Store />
->>>>>>> 86651cf01e15054b4f9b588102b063ea8db6c219
         }
         {!Cookies.get('DLacy') &&
           <React.Fragment>
