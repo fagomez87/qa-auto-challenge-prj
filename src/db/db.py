@@ -4,6 +4,7 @@ class DataBase:
     def __init__(self):
         self.db = TinyDB('db.json')
         self.users = self.db.table('users')
+        self.products = self.db.table('products')
 
     def insert(self, table, data_dict):
         if type(table) == database.Table:
