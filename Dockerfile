@@ -8,12 +8,12 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
 RUN apt-get -y install nodejs
 
 # cp source code
-COPY . /opt/store
+COPY ./src /opt/store
 
 # install node dependencies
-WORKDIR /opt/store/src/ui
+WORKDIR /opt/store/ui
 RUN npm install
 
 # install python dependencies
-#WORKDIR /opt/store/src/api
-#RUN pip install
+WORKDIR /opt/store/api
+RUN pip install -r requirements.txt

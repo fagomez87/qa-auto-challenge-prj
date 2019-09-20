@@ -41,7 +41,6 @@ class UserLogin(Resource):
                     return 'Login succeeded.', 200
 
         return 'Invalid username/password combo.', 401
- 
 
 api.add_resource(UserCreation, REGISTER_USER)
 api.add_resource(UserLogin, LOGIN_USER)
