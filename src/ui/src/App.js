@@ -26,10 +26,10 @@ class App extends Component {
               </Tabs>
             </AppBar>
             <header className="App-header">
-              {this.state.view == "store" &&
+              {this.state.view === "store" &&
                 <Store />
               }
-              {this.state.view == "cart" &&
+              {this.state.view === "cart" &&
                 <Cart />
               }
             </header>

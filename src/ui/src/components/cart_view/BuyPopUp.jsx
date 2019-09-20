@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import imageDlacyCoin from '../resources/penny_dlacy.png';
 
 class BuyPopUp extends Component {
     state = { 
@@ -28,11 +29,12 @@ class BuyPopUp extends Component {
                 open={this.state.open}
                 onClose={() => this.close()}
             >
-                <DialogTitle>Thanks for Buying!</DialogTitle>
+                <DialogTitle>Thank you!</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Thanks for buying with ASAPP Store! We'll be sending you a link to your mail for you to complete payment.
-                        We handle exclusively DLacy Coins!
+                        We'll be sending you a link by e-mail to complete payment.
+                        We only accept DLacy Coins!!
+                        <img src={imageDlacyCoin} className="dlacy-coin" />
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
