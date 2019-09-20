@@ -34,11 +34,11 @@ class ProductCard extends Component {
     }
 
     imageValidation(product) {
-        if(product == "ASAPP Pen") {
+        if(product === "ASAPP Pen") {
             return imagePen;
-        } else if(product == "ASAPP Stickers") {
+        } else if(product === "ASAPP Stickers") {
             return imageStickers;
-        } else if(product == "ASAPP Water Bottle") {
+        } else if(product === "ASAPP Water Bottle") {
             return imageWaterBottle;
         }
     }
