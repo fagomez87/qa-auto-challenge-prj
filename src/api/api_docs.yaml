@@ -104,7 +104,7 @@ paths:
   "/{username}/products/{product_name}/add":
     get:
       tags:
-      - products
+      - "{username}"
       summary: Add product to cart
       description: 
       operationId: addProduct
