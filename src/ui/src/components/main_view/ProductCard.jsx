@@ -52,12 +52,13 @@ class ProductCard extends Component {
                 }
                 <CardActionArea>
                     <CardMedia
+                        className="product-media"
                         component="img"
                         // className={this.useStyles.media}
                         src={this.imageValidation(this.props.productName)}
                         title="product"
                     />
-                    <CardContent>
+                    <CardContent className="product-card-content">
                         <Typography gutterBottom variant="h4" component="h2" data-test-name="product-title">
                             {this.props.productName}
                         </Typography>
