@@ -24,11 +24,11 @@ class Login extends Component {
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="h2">
-                            Please Provide a Contact for this transaction
+                            Please provide a Contact for this transaction
                         </Typography>
                         <TextField
                             label="Mail"
-                            defaultValue="mail@dlacy.com"
+                            placeholder="mail@dlacy.com"
                             fullWidth="true"
                         />
                     </CardContent>

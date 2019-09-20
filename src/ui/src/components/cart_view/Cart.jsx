@@ -25,38 +25,44 @@ class Cart extends Component {
         })
     }
 
+    remove() {
+        //fetch /remove_items
+    }
+
     render() { 
         return (  
             <div>
                 {this.state.dialog &&
                     <BuyPopUp open={true} />
                 }
-                <Paper>
-                    <Table>
+                <Paper className="cart-table">
+                    <Table className="cart-table">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Products</TableCell>
-                                <TableCell align="right">Quantity</TableCell>
-                                <TableCell align="right">In Stock</TableCell>
-                                <TableCell align="right">Remove</TableCell>
+                                <TableCell align="center">Quantity</TableCell>
+                                <TableCell align="center">In Stock</TableCell>
+                                <TableCell align="center">Remove</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {cartList['products'].map(product => (
-                                <TableRow>
+                                <TableRow className="cart-table-row">
                                     <TableCell>{product.name}</TableCell>
-                                    <TableCell align="right">{product.quantity}</TableCell>
-                                    <TableCell align="right">{product.stock}</TableCell>
-                                    <TableCell align="center"><a>x</a></TableCell>
+                                    <TableCell align="center">{product.quantity}</TableCell>
+                                    <TableCell align="center">{product.stock}</TableCell>
+                                    <TableCell align="center"><Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </Paper>
                 <br /><br />
-                <Button onClick={() => this.buy()} size="big" color="secondary">
-                    BUY!
-                </Button>
+                <div className="buy-button">
+                    <Button onClick={() => this.buy()} size="big" color="secondary" variant="contained">
+                        BUY!
+                    </Button>
+                </div>
             </div>
         );
     }

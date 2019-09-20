@@ -40,3 +40,12 @@
 .product-media {
   height: 250px;
 }
+
+.cart-table {
+  width: 900px;
+}
+
+.cart-table-row {
+  height: 110px;
+  width: 100%;
+}
