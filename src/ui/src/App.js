@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Store from './components/main_view/Store'
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -16,15 +15,15 @@ class App extends Component {
       <div className="App">
       <AppBar position="static">
         <Tabs>
-          <Tab onClick={() => this.setState({view: "store"})} label="Store" />
-          <Tab onClick={() => this.setState({view: "cart"})} label="Cart" />
+          <Tab onClick={() => this.setState({view: "store"})} label="Store" data-test-name="menu_store_option" />
+          <Tab onClick={() => this.setState({view: "cart"})} label="Cart" data-test-name="menu_cart_option" />
         </Tabs>
       </AppBar>
       <header className="App-header">
-        {this.state.view == "store" &&
+        {this.state.view === "store" &&
           <Store />
         }
-        {this.state.view == "cart" &&
+        {this.state.view === "cart" &&
           <p>Hello</p>
         }
       </header>
