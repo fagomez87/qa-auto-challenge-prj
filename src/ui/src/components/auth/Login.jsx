@@ -33,11 +33,9 @@ class Login extends Component {
                         />
                     </CardContent>
                 </CardActionArea>
-                {/* <CardActions> */}
                     <Button onClick={() => this.login()} size="small" color="primary">
                         Log In
                     </Button>
-                {/* </CardActions> */}
             </Card>
         );
     }

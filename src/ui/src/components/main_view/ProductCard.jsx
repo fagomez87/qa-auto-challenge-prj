@@ -43,8 +43,7 @@ class ProductCard extends Component {
         }
     }
 
-    render() { 
-        console.log(this.props.productName)
+    render() {
         return ( 
             <Card className="product-card" data-test-name="product-card">
                 {this.state.alert &&

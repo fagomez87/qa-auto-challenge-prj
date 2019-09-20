@@ -8,8 +8,16 @@ import Paper from '@material-ui/core/Paper';
 import cartList from '../resources/sampleCartList';
 import Button from '@material-ui/core/Button';
 import BuyPopUp from './BuyPopUp';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 class Cart extends Component {
+
+    constructor() {
+        super();
+        this.handleChange = this.handleChange.bind(this)
+    }
+
     state = {  
         dialog: false
     }
@@ -27,6 +35,10 @@ class Cart extends Component {
 
     remove() {
         //fetch /remove_items
+    }
+
+    handleChange(e) {
+        // console.log(e.target.value)
     }
 
     render() { 
@@ -49,7 +61,14 @@ class Cart extends Component {
                             {cartList['products'].map(product => (
                                 <TableRow className="cart-table-row">
                                     <TableCell>{product.name}</TableCell>
-                                    <TableCell align="center">{product.quantity}</TableCell>
+                                    <TableCell align="center">
+                                    <select onChange={this.handleChange}>
+                                        {Array.apply(null, {length: product.stock}).map((e, i) => (
+                                            <option value={i} selected={i == product.quantity}>{i}</option>
+                                        ))
+                                        }
+                                    </select>
+                                    </TableCell>
                                     <TableCell align="center">{product.stock}</TableCell>
                                     <TableCell align="center"><Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>

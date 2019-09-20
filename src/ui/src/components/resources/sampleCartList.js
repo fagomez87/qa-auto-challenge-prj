@@ -7,7 +7,7 @@ const cartList = {
         },
         {
             "name": "ASAPP Stickers",
-            "quantity": 10,
+            "quantity": 3,
             "stock": 4
         }
     ]
