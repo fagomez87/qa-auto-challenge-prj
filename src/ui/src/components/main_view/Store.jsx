@@ -7,7 +7,7 @@ class Store extends Component {
     }
 
     componentDidMount() {
-        
+        // fetch API for /products
     }
 
     render() { 
