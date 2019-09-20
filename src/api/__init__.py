@@ -10,5 +10,4 @@ api = Api(app)
 
 blueprint_data = load_swagger_blueprint() 
 
-app.register_blueprint(blueprint_data['blueprint'], 
-                       url_prefix=blueprint_data['swagger_url'])
+app.register_blueprint(blueprint_data['blueprint'], url_prefix=blueprint_data['swagger_url'])
