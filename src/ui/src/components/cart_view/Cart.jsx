@@ -63,12 +63,16 @@ class Cart extends Component {
                                 <TableRow className="cart-table-row">
                                     <TableCell>{product.name}</TableCell>
                                     <TableCell align="center">
+                                    {product.quantity < product.stock ?
                                     <select onChange={this.handleChange}>
                                         {Array.apply(null, {length: product.stock}).map((e, i) => (
                                             <option value={i} selected={i == product.quantity}>{i}</option>
                                         ))
                                         }
                                     </select>
+                                    :
+                                    <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
+                                    }
                                     </TableCell>
                                     <TableCell align="center">{product.stock}</TableCell>
                                     <TableCell align="center"><Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">x</Button></TableCell>
