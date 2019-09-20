@@ -5,4 +5,5 @@ tmp/
 *.pyc
 *.pickle
 *.npy
+*.DS_Store
 .cache/
