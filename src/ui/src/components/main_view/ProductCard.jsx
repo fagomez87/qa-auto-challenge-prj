@@ -54,10 +54,10 @@ class ProductCard extends Component {
                 </CardActionArea>
                 <CardActions>
                     <Button onClick={() => this.buy()} size="small" color="primary">
-                        Buy!
+                        Add to Cart
                     </Button>
                     {this.props.productStock > 0 &&
-                        <Button size="small" color="primary">
+                        <Button data-test-name="stock-button" size="small" color="primary">
                             In Stock!
                         </Button>
                     }
