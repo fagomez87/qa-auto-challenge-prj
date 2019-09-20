@@ -1,0 +1,8 @@
+# tmp
+tmp/
+
+# Python
+*.pyc
+*.pickle
+*.npy
+.cache/
