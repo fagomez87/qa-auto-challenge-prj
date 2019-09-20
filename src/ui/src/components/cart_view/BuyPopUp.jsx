@@ -24,25 +24,46 @@ class BuyPopUp extends Component {
         })
     } 
     render() { 
-        return (  
-            <Dialog
-                open={this.state.open}
-                onClose={() => this.close()}
-            >
-                <DialogTitle>Thank you!</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        We'll be sending you a link by e-mail to complete payment.
-                        We only accept DLacy Coins!!
-                        <img src={imageDlacyCoin} className="dlacy-coin" />
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => this.close()} color="primary">
-                        Awesome
-                    </Button>
-                </DialogActions>
-            </Dialog>
+        return (
+            <React.Fragment>
+                {this.props.code == 200 ?
+                <Dialog
+                    open={this.state.open}
+                    onClose={() => this.close()}
+                >
+                    <DialogTitle>Thank you!</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            We'll be sending you a link by e-mail to complete payment.
+                            We only accept DLacy Coins!!
+                            <img src={imageDlacyCoin} className="dlacy-coin" />
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => this.close()} color="primary">
+                            Awesome
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                :
+                <Dialog
+                    open={this.state.open}
+                    onClose={() => this.close()}
+                >
+                    <DialogTitle>Oops!</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            It seems there was an issue!
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => this.close()} color="primary">
+                            Boo!
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                }
+            </React.Fragment>
         );
     }
 }

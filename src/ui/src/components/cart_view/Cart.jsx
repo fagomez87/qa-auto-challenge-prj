@@ -19,7 +19,8 @@ class Cart extends Component {
     }
 
     state = {  
-        dialog: false
+        dialog: false,
+        buyResponseCode: 200
     }
 
     componentDidMount() {
@@ -45,7 +46,7 @@ class Cart extends Component {
         return (  
             <div>
                 {this.state.dialog &&
-                    <BuyPopUp open={true} />
+                    <BuyPopUp open={true} code={this.state.buyResponseCode}/>
                 }
                 <Paper className="cart-table">
                     <Table className="cart-table">
