@@ -5,7 +5,7 @@ class DataBase:
         self.db = TinyDB('db.json')
         self.users = self.create_table('users')
         self.products = self.create_table('products')
-        self.cart = self.create_table('carts')
+        self.cart = self.create_table('cart')
         self.query = Query()
 
     def insert(self, table, data_dict):
