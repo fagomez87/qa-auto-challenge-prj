@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 
-from src.db.db import DataBase
 from src.api.endpoints import endpoints
+from src.db.db import DataBase
+from src.db.default_inventory import default_inventory
 
 
 app = Flask(__name__)
@@ -135,4 +136,11 @@ api.add_resource(CheckoutCart, endpoints['CHECKOUT_CART'])
 
 
 if __name__ == '__main__':
+    db.purge_table(db.users)
+    db.purge_table(db.cart)
+    db.purge_table(db.products)
+
+    for product in default_inventory:
+        db.insert(db.products, product)
+
     app.run(debug=True)
