@@ -1,4 +1,4 @@
-cartList = {
+const cartList = {
     "products": [
         {
             "name": "ASAPP Pen",
