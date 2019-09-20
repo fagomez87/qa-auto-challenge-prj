@@ -53,3 +53,8 @@
   height: 110px;
   width: 100%;
 }
+
+select {
+  width: 60px;
+  height: 20px;
+}
