@@ -7,3 +7,4 @@ tmp/
 *.npy
 *.DS_Store
 .cache/
+db.json

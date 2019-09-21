@@ -6,10 +6,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import config from '../../config/config';
 
 class Register extends Component {
     state = { 
-        open: true
+        open: true,
+        apiUrl: config['api']
     }
 
     componentWillReceiveProps() {
@@ -19,8 +21,20 @@ class Register extends Component {
     }
 
     register() {
-        this.setState({
-            open: false
+        const username = document.getElementById("username")
+        const password = document.getElementById("password")
+        const opts = {
+            "username": username,
+            "password": password
+        }
+        fetch(this.state.apiUrl + '/users/register', {
+            method: 'post',
+            body: opts
+        }).then(function(response) {
+            console.log(response.json());
+            this.setState({
+                open: false
+            })
         })
     } 
 
@@ -37,10 +51,12 @@ class Register extends Component {
                             Please insert Username and Password
                         </DialogContentText>
                         <TextField
+                            id="username"
                             label="Username"
                             fullWidth="true"
                         />
                         <TextField
+                            id="password"
                             label="Password"
                             fullWidth="true"
                             type="password"
