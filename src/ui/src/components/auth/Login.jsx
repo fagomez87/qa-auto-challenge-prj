@@ -24,7 +24,10 @@ class Login extends Component {
         }
         fetch(this.state.apiUrl + '/users/login', {
             method: 'post',
-            body: JSON.stringify(opts)
+            body: JSON.stringify(opts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then(() => {
             Cookies.set("DLacy", opts['username'])
             this.setState({
