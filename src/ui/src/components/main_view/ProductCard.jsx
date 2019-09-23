@@ -11,6 +11,8 @@ import AddToCartAlert from './AddToCartAlert';
 import imagePen from '../resources/pen.jpg';
 import imageStickers from '../resources/stickers.jpg'
 import imageWaterBottle from '../resources/waterbottle.jpg'
+import config from '../../config/config';
+import Cookies from 'js-cookie';
 
 
 class ProductCard extends Component {
@@ -24,10 +26,22 @@ class ProductCard extends Component {
       });
     
     state = {  
-        alert: false
+        alert: false,
+        apiUrl: config['api'],
     }
 
-    buy() {
+    buy(product) {
+        const quantity = document.getElementById(`quantity-${product}`).value
+        const opts = {
+            "quantity": quantity
+        }
+        fetch(`${this.state.apiUrl}/${Cookies.get('DLacy')}/products/${product}/add`, {
+            method: 'post',
+            body: JSON.stringify(opts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         this.setState({
             alert: true
         })
@@ -67,9 +81,15 @@ class ProductCard extends Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button onClick={() => this.buy()} size="small" color="primary" data-test-name="add-to-cart-button">
+                    <Button onClick={() => this.buy(this.props.productName)} size="small" color="primary" data-test-name="add-to-cart-button">
                         Add to Cart
                     </Button>
+                    <select id={`quantity-${this.props.productName}`}
+                        onChange={this.handleChange}>
+                            {Array.apply(null, {length: this.props.productStock}).map((e, i) => (
+                                <option value={i} disabled={i == 0} hidden={i == 0}>{i}</option>
+                            ))}
+                    </select>
                     {this.props.productStock > 0 &&
                         <Button data-test-name="stock-button" size="small" color="primary">
                             In Stock!
