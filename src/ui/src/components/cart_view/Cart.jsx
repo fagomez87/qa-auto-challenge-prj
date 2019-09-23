@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 import BuyPopUp from './BuyPopUp';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Cookies from 'js-cookie';
+import config from '../../config/config';
 
 class Cart extends Component {
 
@@ -20,11 +22,27 @@ class Cart extends Component {
 
     state = {  
         dialog: false,
-        buyResponseCode: 200
+        buyResponseCode: 200,
+        apiUrl: config['api'],
     }
 
     componentDidMount() {
-        // fetch /cart
+        const username = Cookies.get('DLacy')
+        fetch(`${this.state.apiUrl}/${username}/products/cart`)
+        .then(response => response.json())
+        .then(response => {
+            this.setState({
+                cart: response
+            })
+        })
+        fetch(`${this.state.apiUrl}/${username}/products`)
+        .then(response => response.json())
+        .then(response => {
+            this.setState({
+                products: response
+            })
+        })
+
     }
 
     buy() {
@@ -59,22 +77,22 @@ class Cart extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {cartList['products'].map(product => (
+                            {this.state.cart != null && this.state.cart.map(product => (
                                 <TableRow className="cart-table-row">
-                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.product_name}</TableCell>
                                     <TableCell align="center">
-                                    {product.quantity < product.stock ?
+                                    {/* {product.product_qty < this.state.products[].product_qty ? */}
                                     <select onChange={this.handleChange}>
-                                        {Array.apply(null, {length: product.stock}).map((e, i) => (
-                                            <option value={i} selected={i == product.quantity}>{i}</option>
+                                        {Array.apply(null, {length: product.product_qty}).map((e, i) => (
+                                            <option value={i} selected={i == product.product_qty}>{i}</option>
                                         ))
                                         }
                                     </select>
-                                    :
+                                    {/* :
                                     <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
-                                    }
+                                    } */}
                                     </TableCell>
-                                    <TableCell align="center">{product.stock}</TableCell>
+                                    <TableCell align="center">{product.product_qty}</TableCell>
                                     <TableCell align="center"><Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>
                             ))}
