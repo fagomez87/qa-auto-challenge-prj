@@ -1,6 +1,7 @@
 from src.api import app, api, db
 from src.api.data import endpoints
-from src.api.product_endpoints import ProductInfo, ProductsInfo, AddProductToCart, CheckoutCart, CartInfo
+from src.api.product_endpoints import ProductInfo, ProductsInfo, \
+    AddProductToCart, CheckoutCart, CartInfo, RemoveProductFromCart
 from src.api.user_endpoints import UserCreation, UserLogin
 from src.db.default_inventory import default_inventory
 
@@ -12,6 +13,7 @@ if __name__ == '__main__':
     api.add_resource(AddProductToCart, endpoints['ADD_TO_CART'])
     api.add_resource(CartInfo, endpoints['GET_CART'])
     api.add_resource(CheckoutCart, endpoints['CHECKOUT_CART'])
+    api.add_resource(RemoveProductFromCart, endpoints['REMOVE_FROM_CART'])
 
     db.purge_table(db.users)
     db.purge_table(db.cart)

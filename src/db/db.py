@@ -27,13 +27,18 @@ class DataBase:
         if type(table) == database.Table:
             table.update(update, query)
         else:
-            _db.table(table).update(update, query)
+            self.db.table(table).update(update, query)
 
-    def remove(self, query):
+    def remove(self, table, query):
+        if type(table) == database.Table:
+            table.remove(query)
+        else:
+            self.db.table(table).remove(query)
+
         return self.db.remove(query)
 
     def purge_table(self, table):
         if type(table) == database.Table:
             table.purge()
         else:
-            _db.table(table).purge()
+            self.db.table(table).purge()
