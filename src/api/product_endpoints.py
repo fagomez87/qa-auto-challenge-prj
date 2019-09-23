@@ -40,7 +40,7 @@ class AddProductToCart(Resource):
             product = results_from_inventory[0]  # making assumption we aren't making dupe products, just for now
             if product.get('product_qty') >= needed_qty:
                 # we will deduct the qty from the db at checkout time
-                item_for_cart = {'product_name': str(product_name), 'product_qty': int(needed_qty)}
+                item_for_cart = {'product_name': str(product_name), 'product_qty': int(needed_qty), 'cart_owner': str(username)}
 
                 db.insert(table=db.cart, data_dict=item_for_cart)
                 return 'QTY "{}" of product "{}" added to cart successfully'.format(needed_qty, product_name), 200
@@ -49,6 +49,14 @@ class AddProductToCart(Resource):
 
         return 'Product "{}" does not exist.', 400
 
+class CartInfo(Resource):
+    def get(self, username):
+        if not is_logged_in(db, username):
+            return 'User must be logged-in to perform this action', 401
+
+        cart = db.search(db.cart, query=(db.query.cart_owner == username))
+        if cart:
+            return cart
 
 class CheckoutCart(Resource):
     def get(self, username):
@@ -61,7 +69,7 @@ class CheckoutCart(Resource):
         if not is_logged_in(db, username):
             return 'User must be logged-in to perform this action', 401
 
-        cart = db.cart
+        cart = db.search(db.cart, query=(db.query.cart_owner == username))
         inventory = db.products
         for cart_product in cart:
             cart_product_name = cart_product.get('product_name')
