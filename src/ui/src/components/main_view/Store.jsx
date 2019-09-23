@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import ProductCard from './ProductCard';
-import productList from '../resources/sampleProductList'
 import config from '../../config/config';
 import Cookies from 'js-cookie';
 
 class Store extends Component {
     state = { 
-        apiUrl: config['api'],
-        products: {}
+        apiUrl: config['api']
     }
 
     componentDidMount() {
-        // fetch API for /products
-        fetch(`${this.state.apiUrl}/${Cookies.get('DLacy')}/products/ASAPP Pens`)
+        fetch(`${this.state.apiUrl}/${Cookies.get('DLacy')}/products`)
         .then(response => response.json())
         .then(response => {
             this.setState({
@@ -22,15 +19,16 @@ class Store extends Component {
     }
 
     render() { 
-        const productCards = productList['products'].map((product) => (
-            <ProductCard
-                productName={product['name']}
-                productDescription={product['description']}
-                productStock={product['stock']}
-            />
-        ))
-        return ( 
-            <div>{productCards}</div>
+        return (
+            <div>{ this.state.products != null &&
+                this.state.products.map((product) => (
+                    <ProductCard
+                        productName={product['product_name']}
+                        productDescription={product['product_descr']}
+                        productStock={product['product_qty']}
+                    />
+                ))
+            }</div>
         );
     }
 }

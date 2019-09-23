@@ -34,7 +34,7 @@ class ProductCard extends Component {
     }
 
     imageValidation(product) {
-        if(product === "ASAPP Pen") {
+        if(product === "ASAPP Pens") {
             return imagePen;
         } else if(product === "ASAPP Stickers") {
             return imageStickers;
