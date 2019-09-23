@@ -7,7 +7,7 @@ schema = {
             'columns': {'product_name': str, 'product_qty': int, 'product_descr': str}
         },
         'cart': {
-            'columns': {'product_name': str, 'product_qty': int}
+            'columns': {'product_name': str, 'product_qty': int, "cart_owner": str}
         }
     }
 }

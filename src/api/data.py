@@ -4,6 +4,7 @@ endpoints = {
     'GET_PRODUCTS': '/<string:username>/products',
     'GET_PRODUCT': '/<string:username>/products/<string:product_name>',
     'ADD_TO_CART': '/<string:username>/products/<string:product_name>/add',
+    'GET_CART': '/<string:username>/products/cart',
     'CHECKOUT_CART': '/<string:username>/products/cart/checkout'
 }
 
