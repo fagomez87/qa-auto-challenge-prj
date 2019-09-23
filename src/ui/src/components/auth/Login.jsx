@@ -7,17 +7,31 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import config from '../../config/config';
 import Cookies from 'js-cookie';
 import Register from './Register';
 
 class Login extends Component {
     state = {  
-        register: false
+        register: false,
+        apiUrl: config['api'],
     }
 
     login() {
-        Cookies.set('DLacy', "ok")
-        window.location.reload()
+        const opts = {
+            "username": document.getElementById("username").value,
+            "password": document.getElementById("password").value
+        }
+        fetch(this.state.apiUrl + '/users/login', {
+            method: 'post',
+            body: JSON.stringify(opts)
+        }).then(() => {
+            Cookies.set("DLacy", opts['username'])
+            this.setState({
+                open: false
+            })
+            window.location.reload();
+        })
     }
 
     initiateRegister() {
@@ -38,10 +52,12 @@ class Login extends Component {
                             Please Login
                         </Typography>
                         <TextField
+                            id="username"
                             label="Username"
                             fullWidth="true"
                         />
                         <TextField
+                            id="password"
                             label="Password"
                             fullWidth="true"
                             type="password"

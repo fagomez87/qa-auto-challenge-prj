@@ -7,11 +7,17 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import config from '../../config/config';
+import Cookies from 'js-cookie';
 
 class Register extends Component {
-    state = { 
-        open: true,
-        apiUrl: config['api']
+
+    constructor() {
+        super();
+        this.state = { 
+            open: true,
+            apiUrl: config['api'],
+        }
+        this.setState = this.setState.bind(this);
     }
 
     componentWillReceiveProps() {
@@ -21,17 +27,14 @@ class Register extends Component {
     }
 
     register() {
-        const username = document.getElementById("username")
-        const password = document.getElementById("password")
         const opts = {
-            "username": username,
-            "password": password
+            "username": document.getElementById("username").value,
+            "password": document.getElementById("password").value
         }
         fetch(this.state.apiUrl + '/users/register', {
             method: 'post',
-            body: opts
-        }).then(function(response) {
-            console.log(response.json());
+            body: JSON.stringify(opts)
+        }).then(() => {
             this.setState({
                 open: false
             })
