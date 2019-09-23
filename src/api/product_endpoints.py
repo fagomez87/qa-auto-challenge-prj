@@ -4,7 +4,7 @@ from src.api import db
 from src.api.helpers import is_logged_in
 
 class ProductInfo(Resource):
-    def get(self, username, product_name=''):
+    def get(self, username, product_name):
         # get info about product quantity and price
         if not is_logged_in(db, username):
             return 'User must be logged-in to perform this action', 401
@@ -18,6 +18,11 @@ class ProductInfo(Resource):
 
             return 'Product "{}" does not exist.', 400
 
+class ProductsInfo(Resource):
+    def get(self, username):
+        if not is_logged_in(db, username):
+            return 'User must be logged-in to perform this action', 401
+        return db.products.all(), 200
 
 class AddProductToCart(Resource):
     def post(self, username, product_name):

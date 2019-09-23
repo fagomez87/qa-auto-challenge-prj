@@ -28,12 +28,15 @@ class Register extends Component {
 
     register() {
         const opts = {
-            "username": document.getElementById("username").value,
-            "password": document.getElementById("password").value
+            "username": document.getElementById("register-username").value,
+            "password": document.getElementById("register-password").value
         }
         fetch(this.state.apiUrl + '/users/register', {
             method: 'post',
-            body: JSON.stringify(opts)
+            body: JSON.stringify(opts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then(() => {
             this.setState({
                 open: false
@@ -54,12 +57,12 @@ class Register extends Component {
                             Please insert Username and Password
                         </DialogContentText>
                         <TextField
-                            id="username"
+                            id="register-username"
                             label="Username"
                             fullWidth="true"
                         />
                         <TextField
-                            id="password"
+                            id="register-password"
                             label="Password"
                             fullWidth="true"
                             type="password"
