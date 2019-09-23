@@ -14,6 +14,11 @@ class App extends Component {
     view: "store"
   }
 
+  logout() {
+    Cookies.remove('DLacy')
+    window.location.reload()
+  }
+
   render() { 
     return (  
       <div className="App">
@@ -21,8 +26,9 @@ class App extends Component {
           <React.Fragment>
             <AppBar position="static">
               <Tabs>
-                <Tab onClick={() => this.setState({view: "store"})} label="Store" />
-                <Tab onClick={() => this.setState({view: "cart"})} label="Cart" />
+                <Tab id="store-tab" onClick={() => this.setState({view: "store"})} label="Store" />
+                <Tab id="cart-tab" onClick={() => this.setState({view: "cart"})} label="Cart" />
+                <Tab id="logout" onClick={() => this.logout()} label="Log Out" />
               </Tabs>
             </AppBar>
             <header className="App-header">
