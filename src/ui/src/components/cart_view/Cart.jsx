@@ -29,7 +29,6 @@ class Cart extends Component {
     componentDidMount() {
         const username = Cookies.get('DLacy')
         this.getCart(username)
-        this.getProducts(username)
     }
 
     getCart(username) {
@@ -39,15 +38,22 @@ class Cart extends Component {
             this.setState({
                 cart: response
             })
+            return response
+        }).then(response => {
+            if (response != null) {
+                for (var i = 0 ; i < response.length ; i++) {
+                    this.getProduct(username, response[i].product_name)
+                }
+            }
         })
     }
 
-    getProducts(username) {
-        fetch(`${this.state.apiUrl}/${username}/products`)
+    getProduct(username, product) {
+        fetch(`${this.state.apiUrl}/${username}/products/${product}`)
         .then(response => response.json())
         .then(response => {
             this.setState({
-                products: response
+                [product]: response.product_qty
             })
         })
     }
@@ -108,17 +114,22 @@ class Cart extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.cart != null && this.state.products != null && this.state.cart.map(product => (
+                            {this.state.cart != null && this.state.cart.map(product => (
                                 <TableRow className="cart-table-row">
                                     <TableCell>{product.product_name}</TableCell>
-                                    {product.product_qty < this.state.products[this.state.cart.indexOf(product)].product_qty ?
-                                    <TableCell align="center">{product.product_qty}</TableCell>
+                                    {product.product_qty < this.state[product.product_name] ?
+                                    <React.Fragment>
+                                        <TableCell align="center">{product.product_qty}</TableCell>
+                                        <TableCell align="center">{this.state[product.product_name]}</TableCell>
+                                    </React.Fragment>
                                     :
-                                    <TableCell align="center">
-                                        <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
-                                    </TableCell>
+                                    <React.Fragment>
+                                        <TableCell align="center">{product.product_qty}</TableCell>
+                                        <TableCell align="center">
+                                            <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
+                                        </TableCell>
+                                    </React.Fragment>
                                     }
-                                    <TableCell align="center">{this.state.products[this.state.cart.indexOf(product)].product_qty}</TableCell>
                                     <TableCell align="center"><Button onClick={() => this.remove(product.product_name)} size="big" color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>
                             ))}
