@@ -28,6 +28,11 @@ class Cart extends Component {
 
     componentDidMount() {
         const username = Cookies.get('DLacy')
+        this.getCart(username)
+        this.getProducts(username)
+    }
+
+    getCart(username) {
         fetch(`${this.state.apiUrl}/${username}/products/cart`)
         .then(response => response.json())
         .then(response => {
@@ -35,6 +40,9 @@ class Cart extends Component {
                 cart: response
             })
         })
+    }
+
+    getProducts(username) {
         fetch(`${this.state.apiUrl}/${username}/products`)
         .then(response => response.json())
         .then(response => {
@@ -42,25 +50,48 @@ class Cart extends Component {
                 products: response
             })
         })
-
     }
 
     buy() {
-        //fetch /buy
-        this.setState({
-            dialog: true
+        const username = Cookies.get('DLacy')
+        const opts = {
+            'username': username
+        }
+        fetch(`${this.state.apiUrl}/${username}/products/cart/checkout`, {
+            method: 'post',
+            body: JSON.stringify(opts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            this.setState({
+                dialog: true
+            })
         })
     }
 
-    remove() {
-        //fetch /remove_items
+    remove(product) {
+        const username = Cookies.get('DLacy')
+        const opts = {
+            'product_name': product,
+            'username': username
+        }
+        fetch(`${this.state.apiUrl}/${username}/products/cart/${product}/remove`, {
+            method: 'post',
+            body: JSON.stringify(opts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            this.getCart(username)
+        })
     }
 
     handleChange(e) {
         // console.log(e.target.value)
     }
 
-    render() { 
+    render() {
         return (  
             <div>
                 {this.state.dialog &&
@@ -77,23 +108,18 @@ class Cart extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.cart != null && this.state.cart.map(product => (
+                            {this.state.cart != null && this.state.products != null && this.state.cart.map(product => (
                                 <TableRow className="cart-table-row">
                                     <TableCell>{product.product_name}</TableCell>
-                                    <TableCell align="center">
-                                    {/* {product.product_qty < this.state.products[].product_qty ? */}
-                                    <select onChange={this.handleChange}>
-                                        {Array.apply(null, {length: product.product_qty}).map((e, i) => (
-                                            <option value={i} selected={i == product.product_qty}>{i}</option>
-                                        ))
-                                        }
-                                    </select>
-                                    {/* :
-                                    <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
-                                    } */}
-                                    </TableCell>
+                                    {product.product_qty < this.state.products[this.state.cart.indexOf(product)].product_qty ?
                                     <TableCell align="center">{product.product_qty}</TableCell>
-                                    <TableCell align="center"><Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">x</Button></TableCell>
+                                    :
+                                    <TableCell align="center">
+                                        <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
+                                    </TableCell>
+                                    }
+                                    <TableCell align="center">{this.state.products[this.state.cart.indexOf(product)].product_qty}</TableCell>
+                                    <TableCell align="center"><Button onClick={() => this.remove(product.product_name)} size="big" color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
