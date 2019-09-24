@@ -42,7 +42,13 @@ class Register extends Component {
                 open: false
             })
         })
-    } 
+    }
+
+    close() {
+        this.setState({
+            open: false
+        })
+    }
 
     render() { 
         return (
