@@ -4,6 +4,7 @@ services:
     image: asapp-qa-challenge-ui
     ports:
       - "3000:3000"
+    command: ["./run.sh"]
   api:
     image: asapp-qa-challenge-api
     ports:
