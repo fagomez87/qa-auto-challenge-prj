@@ -8,7 +8,6 @@ import Tab from '@material-ui/core/Tab';
 import Cookies from 'js-cookie';
 import config from './config/config';
 import './App.css';
-import { Fragment } from 'react';
 
 class App extends Component {
   state = {  

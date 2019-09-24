@@ -5,11 +5,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import cartList from '../resources/sampleCartList';
 import Button from '@material-ui/core/Button';
 import BuyPopUp from './BuyPopUp';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import Cookies from 'js-cookie';
 import config from '../../config/config';
 
@@ -116,7 +113,7 @@ class Cart extends Component {
                         </TableHead>
                         <TableBody>
                             {this.state.cart != null && this.state.cart.map(product => (
-                                <TableRow className="cart-table-row">
+                                <TableRow key={`row_${product.product_name}`} className="cart-table-row">
                                     <TableCell>{product.product_name}</TableCell>
                                     {product.product_qty < this.state[product.product_name] ?
                                     <React.Fragment>
@@ -127,11 +124,11 @@ class Cart extends Component {
                                     <React.Fragment>
                                         <TableCell align="center">{product.product_qty}</TableCell>
                                         <TableCell align="center">
-                                            <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
+                                            <Button onClick={() => this.remove()} color="secondary" variant="contained">OUT OF STOCK</Button>
                                         </TableCell>
                                     </React.Fragment>
                                     }
-                                    <TableCell align="center"><Button onClick={() => this.remove(product.product_name)} size="big" color="secondary" variant="contained">x</Button></TableCell>
+                                    <TableCell align="center"><Button onClick={() => this.remove(product.product_name)} color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -139,7 +136,7 @@ class Cart extends Component {
                 </Paper>
                 <br /><br />
                 <div className="buy-button">
-                    <Button onClick={() => this.buy()} size="big" color="secondary" variant="contained">
+                    <Button onClick={() => this.buy()} color="secondary" variant="contained">
                         BUY!
                     </Button>
                 </div>

@@ -22,7 +22,7 @@ class Store extends Component {
         return (
             <div>{ this.state.products != null &&
                 this.state.products.map((product) => (
-                    <ProductCard
+                    <ProductCard key={product['product_name']}
                         productName={product['product_name']}
                         productDescription={product['product_descr']}
                         productStock={product['product_qty']}
