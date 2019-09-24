@@ -48,10 +48,10 @@ class UserLogout(Resource):
         parser.add_argument('username')
         args = parser.parse_args()
         username = args['username']
-        user = db.search(db.users, (db.query.username == username))
+        user = db.search(db.users, ((db.query.username == username) & (db.query.is_logged_in == True)))
         if user:
             db.update(table=db.users, update={'is_logged_in': False},
                       query=(db.query.username == username))
             return 'Logout succeeded.', 200
 
-        return 'Unable to log out user: User "{}" not found.'.format(username), 400  
+        return 'Unable to log out user: No active session for user "{}".'.format(username), 400  
