@@ -53,9 +53,20 @@ class Cart extends Component {
     }
 
     buy() {
-        //fetch /buy
-        this.setState({
-            dialog: true
+        const username = Cookies.get('DLacy')
+        const opts = {
+            'username': username
+        }
+        fetch(`${this.state.apiUrl}/${username}/products/cart/checkout`, {
+            method: 'post',
+            body: JSON.stringify(opts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            this.setState({
+                dialog: true
+            })
         })
     }
 
@@ -100,19 +111,14 @@ class Cart extends Component {
                             {this.state.cart != null && this.state.products != null && this.state.cart.map(product => (
                                 <TableRow className="cart-table-row">
                                     <TableCell>{product.product_name}</TableCell>
-                                    <TableCell align="center">
                                     {product.product_qty < this.state.products[this.state.cart.indexOf(product)].product_qty ?
-                                    <select onChange={this.handleChange}>
-                                        {Array.apply(null, {length: this.state.products[this.state.cart.indexOf(product)].product_qty}).map((e, i) => (
-                                            <option value={i} disabled={i == 0} hidden={i == 0} selected={i == product.product_qty}>{i}</option>
-                                        ))
-                                        }
-                                    </select>
-                                    :
-                                    <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
-                                    }
-                                    </TableCell>
                                     <TableCell align="center">{product.product_qty}</TableCell>
+                                    :
+                                    <TableCell align="center">
+                                        <Button onClick={() => this.remove()} size="big" color="secondary" variant="contained">OUT OF STOCK</Button>
+                                    </TableCell>
+                                    }
+                                    <TableCell align="center">{this.state.products[this.state.cart.indexOf(product)].product_qty}</TableCell>
                                     <TableCell align="center"><Button onClick={() => this.remove(product.product_name)} size="big" color="secondary" variant="contained">x</Button></TableCell>
                                 </TableRow>
                             ))}
