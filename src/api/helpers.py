@@ -2,7 +2,8 @@ import os
 from flask_swagger_ui import get_swaggerui_blueprint
 from yaml import Loader, load
 
-from src.api.data import swagger_data
+from data import swagger_data
+
 
 def is_logged_in(db, username):
     user = db.search(table=db.users, query=(db.query.username == username))
@@ -12,6 +13,7 @@ def is_logged_in(db, username):
         is_logged_in = False
 
     return is_logged_in
+
 
 def load_swagger_blueprint():
     swagger_url = swagger_data['SWAGGER_URL']

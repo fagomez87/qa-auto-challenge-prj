@@ -1,7 +1,9 @@
 from flask_restful import Resource, reqparse
 
-from src.api import db
-from src.api.helpers import is_logged_in
+from helpers import is_logged_in
+from db.db import DataBase
+
+db = DataBase()
 
 
 class ProductInfo(Resource):
@@ -95,7 +97,7 @@ class CheckoutCart(Resource):
             return 'User must be logged-in to perform this action', 401
 
         cart = db.search(db.cart, query=(db.query.cart_owner == username))
-        inventory = db.products
+        inventory_product = db.products
         for cart_product in cart:
             cart_product_name = cart_product.get('product_name')
             cart_product_qty = cart_product.get('product_qty')

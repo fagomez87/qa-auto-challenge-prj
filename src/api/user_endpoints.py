@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse
 
-from src.api import db
+from db.db import DataBase
+
+db_session = DataBase()
 
 
 class UserCreation(Resource):
@@ -12,13 +14,13 @@ class UserCreation(Resource):
         args = parser.parse_args()
         needed_username = args['username']
 
-        existing_users = db.search(db.users, query=(db.query.username == needed_username))
+        existing_users = db_session.search(db_session.users, query=(db_session.query.username == needed_username))
         if existing_users:
             return 'Username "{}" already exists, please choose another'.format(needed_username), 409
 
         new_user = {'username': needed_username, 'password': args['password'], 'is_logged_in': False}
 
-        db.insert(db.users, new_user)
+        db_session.insert(db_session.users, new_user)
 
         return 'User created successfully', 200
 
@@ -31,12 +33,12 @@ class UserLogin(Resource):
         parser.add_argument('password')
         args = parser.parse_args()
         username = args['username']
-        user = db.search(db.users, (db.query.username == username))
+        user = db_session.search(db_session.users, (db_session.query.username == username))
         if user:
             user = user[0]
             if user.get('password') == args['password']:
-                db.update(table=db.users, update={'is_logged_in': True},
-                          query=(db.query.username == username))
+                db_session.update(table=db_session.users, update={'is_logged_in': True},
+                          query=(db_session.query.username == username))
                 return 'Login succeeded.', 200
 
         return 'Invalid username/password combo.', 401
@@ -48,10 +50,10 @@ class UserLogout(Resource):
         parser.add_argument('username')
         args = parser.parse_args()
         username = args['username']
-        user = db.search(db.users, ((db.query.username == username) & (db.query.is_logged_in == True)))
+        user = db_session.search(db_session.users, ((db_session.query.username == username) & (db_session.query.is_logged_in == True)))
         if user:
-            db.update(table=db.users, update={'is_logged_in': False},
-                      query=(db.query.username == username))
+            db_session.update(table=db_session.users, update={'is_logged_in': False},
+                      query=(db_session.query.username == username))
             return 'Logout succeeded.', 200
 
         return 'Unable to log out user: No active session for user "{}".'.format(username), 400  

@@ -1,0 +1,10 @@
+version: '0.1'
+services:
+  ui:
+    image: asapp-qa-challenge-ui
+    ports:
+      - "3000:3000"
+  api:
+    image: asapp-qa-challenge-api
+    ports:
+      - "5000:5000"
