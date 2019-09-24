@@ -86,8 +86,8 @@ class ProductCard extends Component {
                     </Button>
                     <select id={`quantity-${this.props.productName}`}
                         onChange={this.handleChange}>
-                            {Array.apply(null, {length: this.props.productStock}).map((e, i) => (
-                                <option value={i} disabled={i == 0} hidden={i == 0}>{i}</option>
+                            {Array.apply(null, {length: this.props.productStock + 1}).map((e, i) => (
+                                <option key={i} value={i} disabled={i === 0} hidden={i === 0}>{i}</option>
                             ))}
                     </select>
                     {this.props.productStock > 0 &&

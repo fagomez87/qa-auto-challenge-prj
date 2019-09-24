@@ -27,7 +27,7 @@ class BuyPopUp extends Component {
     render() { 
         return (
             <React.Fragment>
-                {this.props.code == 200 ?
+                {this.props.code === 200 ?
                 <Dialog
                     open={this.state.open}
                     onClose={() => this.close()}
@@ -39,7 +39,7 @@ class BuyPopUp extends Component {
                             We only accept DLacy Coins!!
                         </DialogContentText>
                         <React.Fragment>
-                            <img src={imageDlacyCoin} className="dlacy-coin"/>
+                            <img src={imageDlacyCoin} alt=":dlacy:" className="dlacy-coin"/>
                         </React.Fragment>
                     </DialogContent>
                     <DialogActions>
