@@ -6,17 +6,30 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Cookies from 'js-cookie';
+import config from './config/config';
 import './App.css';
 import { Fragment } from 'react';
 
 class App extends Component {
   state = {  
-    view: "store"
+    view: "store",
+    apiUrl: config['api']
   }
 
   logout() {
-    Cookies.remove('DLacy')
-    window.location.reload()
+    const opts = {
+      "username": Cookies.get('DLacy')
+    }
+    fetch(this.state.apiUrl + '/users/logout', {
+        method: 'post',
+        body: JSON.stringify(opts),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(() => {
+      Cookies.remove('DLacy')
+      window.location.reload()
+    })
   }
 
   render() { 
