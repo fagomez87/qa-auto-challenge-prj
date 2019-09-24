@@ -31,11 +31,27 @@ class UserLogin(Resource):
         parser.add_argument('password')
         args = parser.parse_args()
         username = args['username']
-        for user in db.users.all():
-            if user.get('username') == username:
-                if user.get('password') == args['password']:
-                    db.update(table=db.users, update={'is_logged_in': True},
-                              query=(db.query.username == username))
-                    return 'Login succeeded.', 200
+        user = db.search(db.users, (db.query.username == username))
+        if user:
+            user = user[0]
+            if user.get('password') == args['password']:
+                db.update(table=db.users, update={'is_logged_in': True},
+                          query=(db.query.username == username))
+                return 'Login succeeded.', 200
 
         return 'Invalid username/password combo.', 401
+
+class UserLogout(Resource):
+    def post(self):
+        # logout user
+        parser = reqparse.RequestParser()
+        parser.add_argument('username')
+        args = parser.parse_args()
+        username = args['username']
+        user = db.search(db.users, ((db.query.username == username) & (db.query.is_logged_in == True)))
+        if user:
+            db.update(table=db.users, update={'is_logged_in': False},
+                      query=(db.query.username == username))
+            return 'Logout succeeded.', 200
+
+        return 'Unable to log out user: No active session for user "{}".'.format(username), 400  

@@ -107,5 +107,5 @@ class CheckoutCart(Resource):
             else:
                 return 'Unable to request QTY "{}" for product "{}": insufficient inventory'.format(cart_product_qty, cart_product_name), 400 
 
-        db.purge_table(db.cart)
+        db.remove(db.cart, (db.query.cart_owner == username))
         return 'Checkout successful! Thank you for shopping with us.', 200
