@@ -22,6 +22,7 @@ class BuyPopUp extends Component {
         this.setState({
             open: false
         })
+        window.location.reload()
     } 
     render() { 
         return (

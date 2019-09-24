@@ -22,7 +22,7 @@ class Cart extends Component {
 
     state = {  
         dialog: false,
-        buyResponseCode: 200,
+        buyResponseCode: 0,
         apiUrl: config['api'],
     }
 
@@ -69,8 +69,9 @@ class Cart extends Component {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(() => {
+        }).then(response => {
             this.setState({
+                buyResponseCode: response.status,
                 dialog: true
             })
         })
