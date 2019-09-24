@@ -10,10 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import config from '../../config/config';
 import Cookies from 'js-cookie';
 import Register from './Register';
+import BadLoginAlert from './BadLoginAlert';
 
 class Login extends Component {
     state = {  
         register: false,
+        badlogin: false,
         apiUrl: config['api'],
     }
 
@@ -28,12 +30,18 @@ class Login extends Component {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(() => {
-            Cookies.set("DLacy", opts['username'])
-            this.setState({
-                open: false
-            })
-            window.location.reload();
+        }).then(response => {
+            if (response.status == 200) {
+                Cookies.set("DLacy", opts['username'])
+                this.setState({
+                    open: false
+                })
+                window.location.reload();
+            } else {
+                this.setState({
+                    badlogin: true
+                })
+            }
         })
     }
 
@@ -48,6 +56,9 @@ class Login extends Component {
             <Card className="login-card">
             {this.state.register &&
                 <Register open={true} />
+            }
+            {this.state.badlogin &&
+                <BadLoginAlert open={true}/>
             }
                 <CardActionArea>
                     <CardContent>
