@@ -70,6 +70,31 @@ paths:
           description: Operation successful
         '401':
           description: Invalid username/password combo
+  "/users/logout":
+    post:
+      tags:
+      - users
+      summary: Logout current session
+      description: ''
+      operationId: logoutUser
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: User to logout
+        required: true
+        schema:
+          "$ref": "#/definitions/Logout"
+      responses:
+        '200':
+          description: Operation successful
+        '400':
+          description: No active session
   "/{username}/products/":
     get:
       tags:
@@ -126,6 +151,23 @@ paths:
             not exist
         '401':
           description: User not authenticated
+  "/{username}/products/cart/{product_name}/remove":
+    get:
+      tags:
+      - "{username}"
+      summary: Remove product from cart
+      description: 
+      operationId: addProduct
+      produces:
+      - application/xml
+      - application/json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Product not in cart
+        '401':
+          description: User not authenticated
   "/{username}/products/cart/checkout":
     post:
       tags:
@@ -157,6 +199,11 @@ definitions:
       username:
         type: string
       password:
+        type: string
+  Logout:
+    type: object
+    properties:
+      username:
         type: string
   Add:
     type: object
