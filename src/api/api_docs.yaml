@@ -110,7 +110,7 @@ paths:
         '401':
           description: User not authenticated
   "/{username}/products/{product_name}":
-    post:
+    get:
       tags:
       - "{username}"
       summary: Returns a specific product
@@ -127,7 +127,7 @@ paths:
         '401':
           description: User not authenticated
   "/{username}/products/{product_name}/add":
-    get:
+    post:
       tags:
       - "{username}"
       summary: Add product to cart
@@ -152,7 +152,7 @@ paths:
         '401':
           description: User not authenticated
   "/{username}/products/cart/{product_name}/remove":
-    get:
+    post:
       tags:
       - "{username}"
       summary: Remove product from cart
@@ -166,6 +166,21 @@ paths:
           description: successful operation
         '400':
           description: Product not in cart
+        '401':
+          description: User not authenticated
+  "/{username}/products/cart/checkout":
+    get:
+      tags:
+      - "{username}"
+      summary: Return all items in the user's cart
+      description: This can only be done by the logged in user.
+      operationId: checkoutCart
+      produces:
+      - application/xml
+      - application/json
+      responses:
+        '200':
+          description: successful operation
         '401':
           description: User not authenticated
   "/{username}/products/cart/checkout":
