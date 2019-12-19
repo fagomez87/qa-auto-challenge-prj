@@ -73,6 +73,10 @@ class Login extends Component {
                             label="Password"
                             fullWidth="true"
                             type="password"
+                            onKeyDown={(event) => {
+                                event.key === "Enter" &&
+                                    this.login()
+                            }}
                         />
                     </CardContent>
                 </CardActionArea>
