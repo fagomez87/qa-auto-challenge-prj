@@ -80,10 +80,10 @@ class Login extends Component {
                         />
                     </CardContent>
                 </CardActionArea>
-                    <Button onClick={() => this.login()} size="small" color="primary">
+                    <Button className="auth-button" onClick={() => this.login()} size="small" color="primary">
                         Log In
                     </Button>
-                    <Button onClick={() => this.initiateRegister()} size="small" color="primary">
+                    <Button className="auth-button" onClick={() => this.initiateRegister()} size="small" color="primary">
                         Register
                     </Button>
             </Card>
