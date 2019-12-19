@@ -100,7 +100,6 @@ class Cart extends Component {
     }
 
     render() {
-        console.log(this.state.cart)
         return (  
             <div>
                 {this.state.dialog &&
