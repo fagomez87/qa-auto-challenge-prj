@@ -95,7 +95,12 @@ class Cart extends Component {
         // console.log(e.target.value)
     }
 
+    backToStore() {
+        window.location.reload()
+    }
+
     render() {
+        console.log(this.state.cart)
         return (  
             <div>
                 {this.state.dialog &&
@@ -136,9 +141,15 @@ class Cart extends Component {
                 </Paper>
                 <br /><br />
                 <div className="buy-button">
-                    <Button onClick={() => this.buy()} color="secondary" variant="contained">
-                        BUY!
+                    {this.state.cart !== null && this.state.cart !== undefined ?
+                        <Button onClick={() => this.buy()} color="secondary" variant="contained">
+                            BUY!
+                        </Button>
+                    :
+                    <Button onClick={() => this.backToStore()} color="secondary" variant="contained">
+                        OH NO YOUR CART IS EMPTY
                     </Button>
+                    }
                 </div>
             </div>
         );
