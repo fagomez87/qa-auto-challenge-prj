@@ -12,7 +12,7 @@ const productList = {
         },
         {
             "name": "ASAPP Water Bottle",
-            "description": "Ever been thirsty at work? No more, our new vegan-cruelty_free-hipoallergenic-gluten_free water bottles will keep you hydrated 24/7. Water not included",
+            "description": "Ever been thirsty at work? No more, our new state of the art water bottles will keep you hydrated 24/7. Water not included",
             "stock": 0
         }
     ]

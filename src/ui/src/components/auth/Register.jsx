@@ -40,6 +40,7 @@ class Register extends Component {
             this.setState({
                 open: false
             })
+            window.location.reload();
         })
     }
 
@@ -71,6 +72,10 @@ class Register extends Component {
                             label="Password"
                             fullWidth="true"
                             type="password"
+                            onKeyDown={(event) => {
+                                event.key === "Enter" &&
+                                    this.register()
+                            }}
                         />
                     </DialogContent>
                     <DialogActions>
