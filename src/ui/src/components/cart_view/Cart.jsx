@@ -120,7 +120,7 @@ class Cart extends Component {
                             {this.state.cart != null && this.state.cart.map(product => (
                                 <TableRow key={`row_${product.product_name}`} className="cart-table-row">
                                     <TableCell>{product.product_name}</TableCell>
-                                    {product.product_qty < this.state[product.product_name] ?
+                                    {product.product_qty <= this.state[product.product_name] ?
                                     <React.Fragment>
                                         <TableCell align="center">{product.product_qty}</TableCell>
                                         <TableCell align="center">{this.state[product.product_name]}</TableCell>
