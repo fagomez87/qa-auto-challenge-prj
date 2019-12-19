@@ -65,12 +65,12 @@ class Register extends Component {
                         <TextField
                             id="register-username"
                             label="Username"
-                            fullWidth="true"
+                            fullWidth={true}
                         />
                         <TextField
                             id="register-password"
                             label="Password"
-                            fullWidth="true"
+                            fullWidth={true}
                             type="password"
                             onKeyDown={(event) => {
                                 event.key === "Enter" &&

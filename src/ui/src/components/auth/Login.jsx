@@ -66,12 +66,12 @@ class Login extends Component {
                         <TextField
                             id="username"
                             label="Username"
-                            fullWidth="true"
+                            fullWidth={true}
                         />
                         <TextField
                             id="password"
                             label="Password"
-                            fullWidth="true"
+                            fullWidth={true}
                             type="password"
                             onKeyDown={(event) => {
                                 event.key === "Enter" &&
