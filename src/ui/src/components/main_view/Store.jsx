@@ -16,6 +16,10 @@ class Store extends Component {
                 products: response
             })
         })
+        .catch(() => {
+            Cookies.remove('DLacy')
+            window.location.reload()
+        })
     }
 
     render() { 
