@@ -63,7 +63,3 @@ select {
   width: 60px;
   height: 20px;
 }
-
-.MuiMenu-list {
-  max-height: 300px;
-}

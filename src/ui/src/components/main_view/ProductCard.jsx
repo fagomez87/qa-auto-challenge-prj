@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -16,6 +16,11 @@ import Cookies from 'js-cookie';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
+const styles = {
+    list: {
+      height: "350px"
+    }
+  };
 
 class ProductCard extends Component {
     quantity= '';
@@ -69,6 +74,7 @@ class ProductCard extends Component {
     };
 
     render() {
+        const { classes } = this.props;
         return ( 
             <Card className="product-card" data-test-name="product-card">
                 {this.state.alert &&
@@ -96,7 +102,8 @@ class ProductCard extends Component {
                         Add to Cart
                     </Button>
 
-                    <Select id={`quantity-${this.props.productName}`} value={this.state.quantity} onChange={this.handleChange} >
+                    <Select id={`quantity-${this.props.productName}`} value={this.state.quantity} onChange={this.handleChange}
+                    MenuProps={{ classes: {list:classes.list}}} >
                         {Array.apply(null, {length: this.props.productStock + 1}).map((e, i) => (
                             <MenuItem key={i} value={i} disabled={i === 0} hidden={i === 0}>{i}</MenuItem>
                             ))}
@@ -118,4 +125,4 @@ class ProductCard extends Component {
     }
 }
  
-export default ProductCard;
+export default withStyles(styles)(ProductCard);
