@@ -24,9 +24,9 @@ class BadLoginAlert extends Component {
                     ContentProps={{
                         'aria-describedby': 'snackbar-fab-message-id',
                     }}
-                    message={<span id="snackbar-fab-message-id">Incorrect Username or Password</span>}
+                    message={<span className="error_message" id="snackbar-fab-message-id">Incorrect Username or Password</span>}
                     action={
-                        <Button onClick={() => this.close()} color="inherit" size="small">
+                        <Button className="close_button" onClick={() => this.close()} color="inherit" size="small">
                             Close
                         </Button>
                     }

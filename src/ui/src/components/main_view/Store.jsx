@@ -16,6 +16,10 @@ class Store extends Component {
                 products: response
             })
         })
+        .catch(() => {
+            Cookies.remove('DLacy')
+            window.location.reload()
+        })
     }
 
     render() { 
@@ -26,6 +30,7 @@ class Store extends Component {
                         productName={product['product_name']}
                         productDescription={product['product_descr']}
                         productStock={product['product_qty']}
+                        className="product-card"
                     />
                 ))
             }</div>

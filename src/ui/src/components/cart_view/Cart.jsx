@@ -121,13 +121,13 @@ class Cart extends Component {
                                     <TableCell>{product.product_name}</TableCell>
                                     {product.product_qty <= this.state[product.product_name] ?
                                     <React.Fragment>
-                                        <TableCell align="center">{product.product_qty}</TableCell>
-                                        <TableCell align="center">{this.state[product.product_name]}</TableCell>
+                                        <TableCell className="product-info" align="center">{product.product_qty}</TableCell>
+                                        <TableCell className="product-info" align="center">{this.state[product.product_name]}</TableCell>
                                     </React.Fragment>
                                     :
                                     <React.Fragment>
-                                        <TableCell align="center">{product.product_qty}</TableCell>
-                                        <TableCell align="center">
+                                        <TableCell className="product-info" align="center">{product.product_qty}</TableCell>
+                                        <TableCell className="product-info" align="center">
                                             <Button onClick={() => this.remove()} color="secondary" variant="contained">OUT OF STOCK</Button>
                                         </TableCell>
                                     </React.Fragment>
