@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,9 +13,18 @@ import imageStickers from '../resources/stickers.jpg'
 import imageWaterBottle from '../resources/waterbottle.jpg'
 import config from '../../config/config';
 import Cookies from 'js-cookie';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
+const styles = {
+    list: {
+      height: "350px"
+    }
+  };
 
 class ProductCard extends Component {
+    quantity= '';
+
     useStyles = makeStyles({
         card: {
           maxWidth: 345,
@@ -28,6 +37,7 @@ class ProductCard extends Component {
     state = {  
         alert: false,
         apiUrl: config['api'],
+        quantity: ''
     }
 
     buy(product) {
@@ -57,7 +67,14 @@ class ProductCard extends Component {
         }
     }
 
+    handleChange = event => {
+        this.setState({
+            quantity: event.target.value
+        });
+    };
+
     render() {
+        const { classes } = this.props;
         return ( 
             <Card className="product-card" data-test-name="product-card">
                 {this.state.alert &&
@@ -84,12 +101,14 @@ class ProductCard extends Component {
                     <Button onClick={() => this.buy(this.props.productName)} size="small" color="primary" data-test-name="add-to-cart-button">
                         Add to Cart
                     </Button>
-                    <select id={`quantity-${this.props.productName}`}
-                        onChange={this.handleChange}>
-                            {Array.apply(null, {length: this.props.productStock + 1}).map((e, i) => (
-                                <option key={i} value={i} disabled={i === 0} hidden={i === 0}>{i}</option>
+
+                    <Select id={`quantity-${this.props.productName}`} value={this.state.quantity} onChange={this.handleChange}
+                    MenuProps={{ classes: {list:classes.list}}} >
+                        {Array.apply(null, {length: this.props.productStock + 1}).map((e, i) => (
+                            <MenuItem key={i} value={i} disabled={i === 0} hidden={i === 0}>{i}</MenuItem>
                             ))}
-                    </select>
+                    </Select>
+
                     {this.props.productStock > 0 &&
                         <Button data-test-name="stock-button" size="small" color="primary">
                             In Stock!
@@ -106,4 +125,4 @@ class ProductCard extends Component {
     }
 }
  
-export default ProductCard;
+export default withStyles(styles)(ProductCard);
