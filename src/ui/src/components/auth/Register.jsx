@@ -79,7 +79,7 @@ class Register extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => this.register()} color="primary">
+                        <Button className="auth-button" onClick={() => this.register()} color="primary">
                             Register
                         </Button>
                     </DialogActions>

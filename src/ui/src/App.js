@@ -44,9 +44,9 @@ class App extends Component {
           <React.Fragment>
             <AppBar position="static">
               <Tabs value={this.state.view}>
-                <Tab value="store" id="store-tab" onClick={() => this.setTab("store")} label="Store" />
-                <Tab value="cart" id="cart-tab" onClick={() => this.setTab("cart")} label="Cart" />
-                <Tab value="logout" id="logout" onClick={() => this.logout()} label="Log Out" />
+                <Tab value="store" className="nav-tab" onClick={() => this.setTab("store")} label="Store" />
+                <Tab value="cart" className="nav-tab" onClick={() => this.setTab("cart")} label="Cart" />
+                <Tab value="logout" className="nav-tab" onClick={() => this.logout()} label="Log Out" />
               </Tabs>
             </AppBar>
             <header className="App-header">
