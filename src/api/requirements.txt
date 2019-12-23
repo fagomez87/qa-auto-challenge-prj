@@ -4,3 +4,4 @@ flask-swagger-ui
 flask-cors
 tinydb
 pyyaml
+flake8
