@@ -86,18 +86,11 @@ class RemoveProductFromCart(Resource):
 
 
 class CheckoutCart(Resource):
-    def get(self, username):
-        if not is_logged_in(db, username):
-            return 'User must be logged-in to perform this action', 401
-
-        return db.cart, 200
-
     def post(self, username):
         if not is_logged_in(db, username):
             return 'User must be logged-in to perform this action', 401
 
         cart = db.search(db.cart, query=(db.query.cart_owner == username))
-        inventory_product = db.products
         for cart_product in cart:
             cart_product_name = cart_product.get('product_name')
             cart_product_qty = cart_product.get('product_qty')
@@ -107,7 +100,7 @@ class CheckoutCart(Resource):
                 db.update(table=db.products, update={'product_qty': new_qty},
                           query=(db.query.product_name == cart_product_name))
             else:
-                return 'Unable to request QTY "{}" for product "{}": insufficient inventory'.format(cart_product_qty, cart_product_name), 400 
+                return 'Unable to request QTY "{}" for product "{}": insufficient inventory'.format(cart_product_qty, cart_product_name), 400
 
         db.remove(db.cart, (db.query.cart_owner == username))
         return 'Checkout successful! Thank you for shopping with us.', 200
