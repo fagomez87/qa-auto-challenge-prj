@@ -69,7 +69,7 @@ class CartInfo(Resource):
 
         cart = db.search(db.cart, query=(db.query.cart_owner == username))
         if cart:
-            return cart
+            return cart, 200
 
 
 class RemoveProductFromCart(Resource):
