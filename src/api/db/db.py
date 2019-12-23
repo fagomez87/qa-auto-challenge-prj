@@ -1,5 +1,6 @@
 from tinydb import TinyDB, Query, database
 
+
 class DataBase:
     def __init__(self):
         self.db = TinyDB('db.json')
@@ -12,7 +13,7 @@ class DataBase:
         if type(table) == database.Table:
             table.insert(data_dict)
         else:
-            self.db.table(table_name).insert(data_dict)
+            self.db.table(table).insert(data_dict)
 
     def create_table(self, table_name):
         return self.db.table(table_name)
