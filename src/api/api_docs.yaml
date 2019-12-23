@@ -12,17 +12,17 @@ info:
 host: localhost:5000
 basePath: ""
 tags:
-- name: users
+- name: Auth
   description: User registration and login
-- name: "{username}"
-  description: Endpoints gated by user authentication
+- name: Products
+  description: (Gated by user authentication)
 schemes:
 - http
 paths:
   "/users/register":
     post:
       tags:
-      - users
+      - Auth
       summary: Register as a new user
       description: ''
       operationId: registerUser
@@ -47,7 +47,7 @@ paths:
   "/users/login":
     post:
       tags:
-      - users
+      - Auth
       summary: Login as an existing user
       description: ''
       operationId: loginUser
@@ -72,7 +72,7 @@ paths:
   "/users/logout":
     post:
       tags:
-      - users
+      - Auth
       summary: Logout current session
       description: ''
       operationId: logoutUser
@@ -97,7 +97,7 @@ paths:
   "/{username}/products":
     get:
       tags:
-      - "{username}"
+      - Products
       summary: Returns full inventory list
       description: Returns list of product dictionaries
       operationId: getProducts
@@ -118,7 +118,7 @@ paths:
   "/{username}/products/{product_name}":
     get:
       tags:
-      - "{username}"
+      - Products
       summary: Returns a specific product
       description: ''
       operationId: getProduct
@@ -148,7 +148,7 @@ paths:
   "/{username}/products/{product_name}/add":
     post:
       tags:
-      - "{username}"
+      - Products
       summary: Add product to cart
       description: 
       operationId: addProduct
@@ -185,7 +185,7 @@ paths:
   "/{username}/products/cart":
     get:
       tags:
-      - "{username}"
+      - Products
       summary: Get Current Cart Info
       description: 
       operationId: getCart
@@ -207,7 +207,7 @@ paths:
   "/{username}/products/cart/{product_name}/remove":
     post:
       tags:
-      - "{username}"
+      - Products
       summary: Remove product from cart
       description: 
       operationId: addProduct
@@ -237,7 +237,7 @@ paths:
   "/{username}/products/cart/checkout":
     post:
       tags:
-      - "{username}"
+      - Products
       summary: Check out all the products in the user's cart
       description: This can only be done by the logged in user.
       operationId: checkoutCart
