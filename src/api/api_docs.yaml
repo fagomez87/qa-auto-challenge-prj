@@ -9,15 +9,14 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: petstore.swagger.io
-basePath: "/v2"
+host: localhost:5000
+basePath: ""
 tags:
 - name: users
   description: User registration and login
 - name: "{username}"
   description: Endpoints gated by user authentication
 schemes:
-- https
 - http
 paths:
   "/users/register":
@@ -95,13 +94,20 @@ paths:
           description: Operation successful
         '400':
           description: No active session
-  "/{username}/products/":
+  "/{username}/products":
     get:
       tags:
       - "{username}"
       summary: Returns full inventory list
       description: Returns list of product dictionaries
       operationId: getProducts
+      parameters:
+      - in: path
+        name: username
+        description: Username
+        required: true
+        schema:
+          type: string
       produces:
       - application/json
       responses:
@@ -116,6 +122,19 @@ paths:
       summary: Returns a specific product
       description: ''
       operationId: getProduct
+      parameters:
+      - in: path
+        name: username
+        description: Username
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: product_name
+        description: Product name
+        required: true
+        schema:
+          type: string
       produces:
       - application/xml
       - application/json
@@ -137,6 +156,18 @@ paths:
       - application/xml
       - application/json
       parameters:
+      - in: path
+        name: username
+        description: Username
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: product_name
+        description: Product name
+        required: true
+        schema:
+          type: string
       - in: body
         name: body
         description: Quantity of product needed
@@ -151,6 +182,28 @@ paths:
             not exist
         '401':
           description: User not authenticated
+  "/{username}/products/cart":
+    get:
+      tags:
+      - "{username}"
+      summary: Get Current Cart Info
+      description: 
+      operationId: getCart
+      parameters:
+      - in: path
+        name: username
+        description: Username
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/xml
+      - application/json
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: User not authenticated
   "/{username}/products/cart/{product_name}/remove":
     post:
       tags:
@@ -158,6 +211,19 @@ paths:
       summary: Remove product from cart
       description: 
       operationId: addProduct
+      parameters:
+      - in: path
+        name: username
+        description: Username
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: product_name
+        description: Product name
+        required: true
+        schema:
+          type: string
       produces:
       - application/xml
       - application/json
@@ -169,27 +235,19 @@ paths:
         '401':
           description: User not authenticated
   "/{username}/products/cart/checkout":
-    get:
-      tags:
-      - "{username}"
-      summary: Return all items in the user's cart
-      description: This can only be done by the logged in user.
-      operationId: checkoutCart
-      produces:
-      - application/xml
-      - application/json
-      responses:
-        '200':
-          description: successful operation
-        '401':
-          description: User not authenticated
-  "/{username}/products/cart/checkout":
     post:
       tags:
       - "{username}"
       summary: Check out all the products in the user's cart
       description: This can only be done by the logged in user.
       operationId: checkoutCart
+      parameters:
+      - in: path
+        name: username
+        description: Username
+        required: true
+        schema:
+          type: string
       produces:
       - application/xml
       - application/json
