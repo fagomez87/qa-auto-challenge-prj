@@ -24,7 +24,7 @@ Some guidelines:
 - You're free to use the language and libs you feel more comfortable with, as long as the project is runnable. Bonus points if you include a README.
 - You can build the framework/tests around the app source code, as a standalone project, or both.
 - We don't expect a fully fledged framework, we just want to understand how you would model/structure an Automation project.
-- We don't have any preference in terms of testing layers, that's part of your strategy.
+- Although we're leaving the testing layers splitting decisions to you, be prepared to answer questions about it.
 - If you built a standalone project, bonus points if we can execute it as a docker container.
 
 
