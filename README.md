@@ -1,16 +1,25 @@
 # ASAPP - QA Automation Challenge
 
-## How to Run Locally through Docker-Compose
+## Pre-requisites
+
+*Docker*
+
+If you haven't used it before, [this quickstart guide](https://docs.docker.com/get-started/) should help.
+
+
+## How to run
 
 - Build the Images for API and UI:
 
     `docker build ./src/api -t asapp-qa-challenge-api`
     
     `docker build ./src/ui -t asapp-qa-challenge-ui`
-- Start them through Docker-Compose:
+
+- Start them through docker-compose:
 
     `docker-compose up -d`
-- Go to `localhost:3000` for UI
-- Go to `localhost:5000/api/docs/` for API Documentation
+
+- Browse to `localhost:3000` to access the challenge UI
+- Browse to `localhost:5000/api/docs/` for the API spec
 
 (to stop running, run `docker-compose stop`)
