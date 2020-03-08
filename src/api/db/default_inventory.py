@@ -18,6 +18,6 @@ default_inventory = [
         "product_qty": 25,
         "product_descr": "Ever been thirsty at work? No more, our new "
                          "state of the art bottles will keep you "
-                         "hydrated 24/7. Water not included"
+                         "hydrated 24/7. Water not included."
     }
 ]
