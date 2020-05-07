@@ -40,6 +40,6 @@ class DataBase:
 
     def purge_table(self, table):
         if type(table) == database.Table:
-            table.purge()
+            table.truncate()
         else:
             self.db.table(table).purge()
