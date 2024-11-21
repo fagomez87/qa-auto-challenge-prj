@@ -9,3 +9,12 @@ services:
     ports:
       - "3000:3000"
     command: ["./run.sh"]
+  cypress:
+    image: cypress/included:12.8.1
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
+    depends_on:
+      - ui
+    environment:
+      - CYPRESS_baseUrl=http://ui:3000

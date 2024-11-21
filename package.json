@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "cy:test": "cypress run",
+    "api:test": "jest api/test"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
+    "axios": "^1.7.7",
+    "cypress": "^13.16.0",
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "joi": "^17.13.3"
+  }
+}

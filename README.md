@@ -25,3 +25,16 @@ If you haven't used it before, [this quickstart guide](https://docs.docker.com/g
 - To stop containers you can run `docker-compose stop`.
 
 Note that currently data such as users and stock will not persist after the containers are stopped.
+
+
+## How to run Cypress tests
+- First, you need to start the containers as described above
+- Then, you can run the tests with the following command: `npx cypress open`
+- Then, you can select the browser you want to use and run the tests.
+- If you want to run the tests in headless mode, you can use the following command:
+`npm run cy:test`
+- This will run the tests in headless mode
+
+## How to run API tests
+- First, you need to start the containers as described above
+- Then, you can run the tests with the following command: `npm run api:test`
