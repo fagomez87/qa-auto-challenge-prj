@@ -1,7 +1,7 @@
 {
   "scripts": {
     "cy:test": "cypress run",
-    "api:test": "jest api/test"
+    "api:test": "docker-compose up -d && jest api/test && docker-compose down"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.2.0",

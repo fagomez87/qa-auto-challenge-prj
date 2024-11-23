@@ -25,10 +25,10 @@ class CartPage {
 
     validatePurchase() {
         cy.contains('h2', THANKS).should('be.visible')
-        cy.contains('h2', THANKS).should('contain', THANKS)
+        cy.contains('h2', THANKS).should('have.text', THANKS)
 
         cy.get('p.MuiTypography-root').should('be.visible')
-        cy.get('p.MuiTypography-root').should('contain', MESSAGE)
+        cy.get('p.MuiTypography-root').should('have.text', MESSAGE)
 
         cy.get('img[alt=":dlacy:"]').should('be.visible')
         

@@ -16,21 +16,26 @@ const firstElement = 1;
 
 class HomePage {
     validatePens() {
-        cy.contains('h2', 'ASAPP Pens').should('contain', PENS_TITLE);
-        cy.get('p[data-test-name="product-desc"]').eq(0).should('contain', PENS_DESCRIPTION);
+        cy.contains('h2', 'ASAPP Pens').should('have.text', PENS_TITLE);
+        cy.get('p[data-test-name="product-desc"]').eq(0).should('have.text', PENS_DESCRIPTION);
+        cy.contains('span', 'In Stock!').eq(0).should('have.text',IN_STOCK)
+
     }
     validateStickers() {
-        cy.contains('h2', 'ASAPP Stickers').should('contain', STICKERS_TITLE);
-        cy.get('p[data-test-name="product-desc"]').eq(1).should('contain', STICKERS_DESCRIPTION);
+        cy.contains('h2', 'ASAPP Stickers').should('have.text', STICKERS_TITLE);
+        cy.get('p[data-test-name="product-desc"]').eq(1).should('have.text', STICKERS_DESCRIPTION);
+        cy.contains('span', 'In Stock!').eq(1).should('have.text',IN_STOCK)
+
     }
     validateBottle() {
-        cy.contains('h2', 'ASAPP Water Bottle').should('contain', BOTTLE_TITLE);
-        cy.get('p[data-test-name="product-desc"]').eq(2).should('contain', BOTTLE_DESCRIPTION);
+        cy.contains('h2', 'ASAPP Water Bottle').should('have.text', BOTTLE_TITLE);
+        cy.get('p[data-test-name="product-desc"]').eq(2).should('have.text', BOTTLE_DESCRIPTION);
+        cy.contains('span', 'In Stock!').eq(2).should('have.text',IN_STOCK)
     }
     validateHeader() {
-        cy.contains('span', 'Store').should('contain', STORE);
-        cy.contains('span', 'Cart').eq(0).should('contain', CART);
-        cy.contains('span', 'Log Out').should('contain', LOG_OUT);
+        cy.contains('span', 'Store').should('have.text', STORE);
+        cy.contains('span', 'Cart').eq(0).should('have.text', CART);
+        cy.contains('span', 'Log Out').should('have.text', LOG_OUT);
     }
 
     addRandomPens(useRandom) {
@@ -42,7 +47,7 @@ class HomePage {
             cy.get('div.MuiPaper-rounded ul li').contains(randomValue).click()
         })
         cy.contains('span', 'Add to Cart').eq(0).click()
-        cy.get('span#snackbar-fab-message-id').should('contain', ADDED)
+        cy.get('span#snackbar-fab-message-id').should('have.text', ADDED)
         cy.contains('span', 'Close').click()
 
     }
@@ -58,7 +63,7 @@ class HomePage {
 
         cy.get('span.MuiButton-label').eq(2).click()
 
-        cy.get('span#snackbar-fab-message-id').should('contain', ADDED)
+        cy.get('span#snackbar-fab-message-id').should('have.text', ADDED)
         cy.contains('span', 'Close').click()
     }
 
@@ -72,7 +77,7 @@ class HomePage {
         })
         cy.get('span.MuiButton-label').eq(4).click()
 
-        cy.get('span#snackbar-fab-message-id').should('contain', ADDED)
+        cy.get('span#snackbar-fab-message-id').should('have.text', ADDED)
         cy.contains('span', 'Close').click()
     }
 
@@ -94,7 +99,7 @@ class HomePage {
             cy.get('div.MuiPaper-rounded ul li').contains(lastElement).click()
         })
         cy.contains('span', 'Add to Cart').eq(0).click()
-        cy.get('span#snackbar-fab-message-id').should('contain', ADDED)
+        cy.get('span#snackbar-fab-message-id').should('have.text', ADDED)
         cy.contains('span', 'Close').click()
 
         // ADD MAX STICKERS
@@ -106,7 +111,7 @@ class HomePage {
         })
 
         cy.get('span.MuiButton-label').eq(2).click()
-        cy.get('span#snackbar-fab-message-id').should('contain', ADDED)
+        cy.get('span#snackbar-fab-message-id').should('have.text', ADDED)
         cy.contains('span', 'Close').click()
 
 
@@ -118,7 +123,7 @@ class HomePage {
             cy.get('div.MuiPaper-rounded ul li').contains(lastElement).click()
         })
         cy.get('span.MuiButton-label').eq(4).click()
-        cy.get('span#snackbar-fab-message-id').should('contain', ADDED)
+        cy.get('span#snackbar-fab-message-id').should('have.text', ADDED)
         cy.contains('span', 'Close').click()
 
     }

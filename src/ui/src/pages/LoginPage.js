@@ -11,24 +11,24 @@ class LoginPage {
         cy.visit('localhost:3000/');
     }
 
-    login() {
-        cy.get('input#username').type(this.credentials.username);
-        cy.get('input#password').type(this.credentials.password);
+    login(user = this.credentials.username, pass = this.credentials.password) {
+        cy.get('input#username').type(user);
+        cy.get('input#password').type(pass);
         cy.contains('span', 'Log In').click();
     }
 
     getSnackError() {
-        cy.get('span#snackbar-fab-message-id').should('equal', ERROR);
+        cy.get('span#snackbar-fab-message-id').should('have.text', ERROR);
         cy.contains('span', 'Close').click();
     }
 
-    register() {
+    register(user = this.credentials.username, pass = this.credentials.password) {
         cy.contains('span', 'Register').click();
         
-        cy.get('div[role="dialog"] h2').should('contain', THANK);
-        cy.contains('p', 'Please insert Username and Password').should('contain', INSERT);
-        cy.get('input#register-username').type(this.credentials.username);
-        cy.get('input#register-password').type(this.credentials.password);
+        cy.get('div[role="dialog"] h2').should('have.text', THANK);
+        cy.contains('p', 'Please insert Username and Password').should('have.text', INSERT);
+        cy.get('input#register-username').type(user);
+        cy.get('input#register-password').type(pass);
         cy.get('div[role="dialog"] span').eq(0).click();
         cy.wait(1000)
     }

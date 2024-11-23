@@ -12,7 +12,21 @@ describe('ASAPP automation test', () => {
         // Bring up the container
         cy.exec('docker-compose up -d').then((result) => {
             console.log(result.stdout)
+            cy.wait(10000)
         })
+    })
+
+    it("Register a new user", () => {
+        LoginPage.visit();
+    
+        LoginPage.register("newUser","newPass");
+    })
+
+    it("Login with new user", () => {
+        LoginPage.visit();
+
+        LoginPage.register("newUser","newPass");
+        LoginPage.login("newUser","newPass");
     })
 
     it('Happy path -- should add and proceed to checkout', () => {
@@ -74,7 +88,7 @@ describe('ASAPP automation test', () => {
 
     it('Should not login', () => {
         LoginPage.visit();
-        LoginPage.login();
+        LoginPage.login("fakeUSer","fakePass");
 
         LoginPage.getSnackError();
     })
