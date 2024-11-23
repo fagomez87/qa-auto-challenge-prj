@@ -24,13 +24,13 @@ class HomePage {
     validateStickers() {
         cy.contains('h2', 'ASAPP Stickers').should('have.text', STICKERS_TITLE);
         cy.get('p[data-test-name="product-desc"]').eq(1).should('have.text', STICKERS_DESCRIPTION);
-        cy.contains('span', 'In Stock!').eq(1).should('have.text',IN_STOCK)
+        cy.get('button[data-test-name="stock-button"] span').eq(2).should('have.text',IN_STOCK)
 
     }
     validateBottle() {
         cy.contains('h2', 'ASAPP Water Bottle').should('have.text', BOTTLE_TITLE);
         cy.get('p[data-test-name="product-desc"]').eq(2).should('have.text', BOTTLE_DESCRIPTION);
-        cy.contains('span', 'In Stock!').eq(2).should('have.text',IN_STOCK)
+        cy.get('button[data-test-name="stock-button"] span').eq(4).should('have.text',IN_STOCK)
     }
     validateHeader() {
         cy.contains('span', 'Store').should('have.text', STORE);

@@ -29,7 +29,7 @@ describe('ASAPP automation test', () => {
         LoginPage.login("newUser","newPass");
     })
 
-    it('Happy path -- should add and proceed to checkout', () => {
+    it('Should add and proceed to checkout', () => {
         LoginPage.visit();
 
         // Register new account and login
